@@ -1,0 +1,86 @@
+<style>
+	.fb-wap-forum-simple {
+		font-family: "Roboto", sans-serif;
+		margin: 0;
+		padding: 5px 10px 5px 10px;
+		max-width: 600px;
+	}
+
+	.fbAdLink {
+		text-decoration: inherit;
+		color: inherit;
+	}
+
+	.fbAdTitle {
+		font-weight: 700;
+		font-size: 16px;
+		line-height: 18px;
+		color: #444;
+		text-align: left;
+		margin-top: -16px;
+		margin-left: 12px;
+	}
+
+	.fbAdBody {
+		margin-top: 0px;
+		font-size: 14px;
+		color: #999;
+		text-align: left;
+	}
+
+	.fbAdCallToAction {
+		padding: 5px 0px;
+		font-size: 14px;
+		font-weight: 700;
+		color: rgb(0,127,255);
+		cursor: pointer;
+		display: inline-block;
+		margin: 5px 0 10px 0;
+		border: none 0px !important;
+	}
+</style>
+
+
+<div id='div-gpt-ad-m1a' class="fb-wap-forum-simple"></div>	
+
+<script language="javascript">
+if(typeof listType == 'undefined')
+{
+	alert('listType is not defined');
+}
+else
+{
+	switch(listType)
+	{
+		case 'threadList':
+			var cX = cX || {}; cX.callQueue = cX.callQueue || [];
+			cX.callQueue.push(['invoke', function() {
+				googletag.cmd.push(function() {
+					googletag.defineSlot('/104997785/kaskus-desktop-' + __kaskus_dfp + '/m1a', [[858,84],[858,120]], 'div-gpt-ad-m1a').addService(googletag.pubads()).setTargeting("pos", "m1");
+					googletag.pubads().setTargeting("adxPermission",""+adxPermission+"");
+					googletag.pubads().setTargeting("listType",""+listType+"");
+					googletag.pubads().setTargeting("CxSegments",cX.getUserSegmentIds({persistedQueryId:'5fad6fbc7f27b0ef0171d408556540886c95698e'}));
+					googletag.pubads().setTargeting("seq","a");
+					googletag.display('div-gpt-ad-m1a');
+				});
+
+			}]);
+			break;
+
+		case 'postList':
+			document.getElementById('div-gpt-ad-m1a').innerHTML = '\
+			<fb:ad placementid="356445735231_10156521040895232" format="native" nativeadid="ad_root"></fb:ad>\
+			<div id="ad_root">\
+				<a class="fbAdLink" target="_blank">\
+					<div class="fbAdTitle thirdPartyTitleClass"></div>\
+					<div class="fbAdBody thirdPartyBodyClass"></div>\
+					<div class="fbAdCallToAction thirdPartyCallToActionClass"></div>\
+				</a>\
+			</div>';
+
+			break;
+
+		default:
+	}
+}
+</script>
