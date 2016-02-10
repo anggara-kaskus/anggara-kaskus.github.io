@@ -16,11 +16,10 @@
 		<meta property="og:type" content="article" />
 		<meta property="og:image:type" content="image/jpg" />
 		<meta property="og:site_name" content="Microsite Kaskus" />
-		<meta property="og:medium" content="mult" />
 		<meta property="og:image" content="https://s.kaskus.id/assets/ecard/ecard_56b9b35b36875.jpg" />
-		<meta property="og:url" content="http://anggara-kaskus.github.io" />
-		<meta property="og:title" content="Kaskus Valentine e-Card" />
-		<meta property="og:description" content="KASKUS Valentine E-Card, dari aku untuk kamu dengan cinta KASKUS!" />
+		<meta property="og:url" content="http://microsite.kaskus.dev/ecard/sharing/?image_url=https://s.kaskus.id/assets/ecard/ecard_56b9b35b36875.jpg&amp;from=[Nama Agan]" />
+		<meta property="og:title" content="Ungkapin Valentine ala KASKUS yuk!" />
+		<meta property="og:description" content="Tunjukkan kreativitasmu dengan sticker lucu ala KASKUS! Cuma tanggal 11-15 Februari." />
 
 		<meta property="fb:app_id" content="356445735231" />
 		<meta name="twitter:card" content="summary_large_image" />
@@ -34,7 +33,7 @@
 		<script src="http://microsite.kaskus.dev//js/ecard/kaskusvalentine.js"></script>
 		<script type="text/javascript">
 		$(document).ready(function(){
-			$('#tweet').click(function(){
+			$('.shrbtn').click(function(){
 				window.open($(this).attr('href'),'sharer','toolbar=0,status=0,width=626,height=436');
 				return false;
 			});
@@ -56,16 +55,16 @@
 		<div class="wrapper">
 			<div class="pop-up-result show">
 				<div class="user-action">
-					<a href="http://www.facebook.com/share.php?u=http://microsite.kaskus.dev/ecard/sharing/?image_url=http://forum.kaskus.dev/assets/ecard/ecard_56b9ae83e48d6.jpg" target="_blank">
+					<a class="shrbtn" href="http://www.facebook.com/share.php?u=http%3A%2F%2Fmicrosite.kaskus.dev%2Fecard%2Fsharing%2F%3Fimage_url%3Dhttp%3A%2F%2Fforum.kaskus.dev%2Fassets%2Fecard%2Fecard_56bab103cfd96.jpg%26amp%3Bfrom%3D%5BNama+Agan%5D" target="_blank">
 						<img src="http://microsite.kaskus.dev//assets/ecard/btn_fb.png" alt="">
 					</a>
-					<a id="tweet" href="http://twitter.com/share?url=http://forum.kaskus.dev/assets/ecard/ecard_56b9ae83e48d6.jpg&amp;text=KASKUS Valentine E-Card, dari aku untuk kamu dengan cinta KASKUS!&amp;via=KASKUS&amp;hashtags=KASKUSValentinesDay" target="_blank">
+					<a class="shrbtn" href="http://twitter.com/share?url=https://s.kaskus.id/assets/ecard/ecard_56b9b35b36875.jpg&amp;text=KASKUS Valentine E-Card, dari aku untuk kamu dengan cinta KASKUS!&amp;via=KASKUS&amp;hashtags=KASKUSValentinesDay" target="_blank">
 						<img src="http://microsite.kaskus.dev//assets/ecard/btn_twitter.png" alt="">
 					</a>
 					<a href="javascript:void(0)" id="btn-email" onclick="shareEmail()">
 						<img src="http://microsite.kaskus.dev//assets/ecard/btn_mail.png" alt="">
 					</a>
-					<a href="http://forum.kaskus.dev/assets/ecard/ecard_56b9ae83e48d6.jpg" download="KASKUS Valentine e-Card 2016">
+					<a href="https://s.kaskus.id/assets/ecard/ecard_56b9b35b36875.jpg" download="KASKUS Valentine e-Card 2016">
 						<img src="http://microsite.kaskus.dev//assets/ecard/btn_simpan.png" alt="">
 					</a>
 				</div>
@@ -80,7 +79,7 @@
 						<input name="message" type="text"-->
 						<label>To: </label>
 						<textarea name="recipient" id="recipient-list"></textarea>
-						<input type="hidden" value="http://forum.kaskus.dev/assets/ecard/ecard_56b9ae83e48d6.jpg" name="image" />
+						<input type="hidden" value="https://s.kaskus.id/assets/ecard/ecard_56b9b35b36875.jpg" name="image" />
 						<input type="hidden" value="[Nama Agan]" name="from" />
 						<label><small>*bisa kirim ke lebih dari satu alamat email</small></label>
 						<label><small>*(pisahkan dengan ",")</small></label>
