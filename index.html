@@ -16,8 +16,8 @@
 		<meta property="og:type" content="article" />
 		<meta property="og:image:type" content="image/jpg" />
 		<meta property="og:site_name" content="Microsite Kaskus" />
-		<meta property="og:image" content="http://anggara-kaskus.github.io/ecard_56bb19ca7f347.jpg.og.jpg" />
-		<meta property="og:url" content="http://anggara-kaskus.github.io" />
+		<meta property="og:image" content="http://microsite.kaskus.dev/" />
+		<meta property="og:url" content="http://microsite.kaskus.dev/ecard" />
 		<meta property="og:title" content="Ungkapin Valentine ala KASKUS yuk!" />
 		<meta property="og:description" content="Tunjukkan kreativitasmu dengan sticker lucu ala KASKUS! Cuma tanggal 11-15 Februari." />
 
@@ -25,65 +25,59 @@
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:site" content="@kaskus" />
 
-		<link rel="stylesheet" href="http://microsite.kaskus.dev//style/ecard/style.css" />
+		<link rel="stylesheet" href="http://microsite.kaskus.dev/style/ecard/style.css" />
 		<script src="//code.jquery.com/jquery-1.9.1.js"></script>
 		<script src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-		<script src="http://microsite.kaskus.dev//js/ecard/jquery.ui.touch-punch.min.js"></script>
-		<script src="http://microsite.kaskus.dev//js/ecard/html2canvas.js"></script>
-		<script src="http://microsite.kaskus.dev//js/ecard/kaskusvalentine.js"></script>
-		<script type="text/javascript">
-		$(document).ready(function(){
-			$('.shrbtn').click(function(){
-				window.open($(this).attr('href'),'sharer','toolbar=0,status=0,width=626,height=436');
-				return false;
-			});
-		});
-		</script>
+		<script src="http://microsite.kaskus.dev/js/ecard/jquery.ui.touch-punch.min.js"></script>
+		<script src="http://microsite.kaskus.dev/js/ecard/html2canvas.js"></script>
+		<script src="http://microsite.kaskus.dev/js/ecard/kaskusvalentine.js"></script>
 
 	</head>
 
 	<body>
-		<div id="fb-root"></div>
-		<script>(function(d, s, id) {
-		  var js, fjs = d.getElementsByTagName(s)[0];
-		  if (d.getElementById(id)) return;
-		  js = d.createElement(s); js.id = id;
-		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=515535625168536";
-		  fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));</script>
-
 		<div class="wrapper">
-			<div class="pop-up-result show">
-				<div class="user-action">
-					<a class="shrbtn" href="http://www.facebook.com/share.php?u=http%3A%2F%2Fmicrosite.kaskus.dev%2Fecard%2Fsharing%2F%3Fimage_url%3Dhttp%3A%2F%2Fforum.kaskus.dev%2Fassets%2Fecard%2Fecard_56bab103cfd96.jpg%26amp%3Bfrom%3D%5BNama+Agan%5D" target="_blank">
-						<img src="http://microsite.kaskus.dev//assets/ecard/btn_fb.png" alt="">
-					</a>
-					<a class="shrbtn" href="http://twitter.com/share?url=https://s.kaskus.id/assets/ecard/ecard_56b9b35b36875.jpg&amp;text=KASKUS Valentine E-Card, dari aku untuk kamu dengan cinta KASKUS!&amp;via=KASKUS&amp;hashtags=KASKUSValentinesDay" target="_blank">
-						<img src="http://microsite.kaskus.dev//assets/ecard/btn_twitter.png" alt="">
-					</a>
-					<a href="javascript:void(0)" id="btn-email" onclick="shareEmail()">
-						<img src="http://microsite.kaskus.dev//assets/ecard/btn_mail.png" alt="">
-					</a>
-					<a href="https://s.kaskus.id/assets/ecard/ecard_56b9b35b36875.jpg" download="KASKUS Valentine e-Card 2016">
-						<img src="http://microsite.kaskus.dev//assets/ecard/btn_simpan.png" alt="">
-					</a>
-				</div>
-				<div id="result"><img src="https://s.kaskus.id/assets/ecard/ecard_56b9b35b36875.jpg"></div>
+			<div class="tutorial"></div>
+			<div class="pop-up-result"></div>
+			<div id="user-control-hide"></div>
+			<div id="user-control" style="display:none;">
+				<div id="item-1" class="trigger"></div>
+				<div id="item-2" class="trigger"></div>
+				<div id="item-3" class="trigger"></div>
+				<div id="item-4" class="trigger"></div>
+				<div id="item-5" class="trigger"></div>
+				<div class="divider"></div>
+				<div id="item-6" class="trigger"></div>
+				<div id="item-7" class="trigger"></div>
+				<div id="edit-text" class=""><a href="javascript:void(0)"><img src="http://microsite.kaskus.dev/assets/ecard/icon_tulis.png" alt=""></a></div>
+				<button class="btn-render" onClick="toPNG();_gaq.push(['_trackEvent', 'Ecard Valentine', 'click', 'kirim cinta']);"></button>
+				<form action="http://microsite.kaskus.dev/ecard/save_file" method="post" id="form-hidden">
+					<input type="hidden" name="from" id="from-hidden" value="" />
+					<input type="hidden" name="base64" id="input-hidden" value="" />
+				</form>
 			</div>
 
-			<div id="share-email" class="pop-up">
+			<div id="gallery">
+				<div class="greeting-text">
+					<div>Dear <span id="name-to">[Nama Doi]</span>,</div>
+					<div id="message">Tulis gombalan Agan di sini!</div>
+					<div id="pre-name">With Love,</div>
+					<div id="name-from">[Nama Agan]</div>
+				</div>
+			</div>
+
+			<div id="kirim-pesan" class="pop-up">
 				<div class="input-message">
-					<h2>Share via email</h2>
-					<form class="form-email" action="http://microsite.kaskus.dev//ecard/send_email" method="post" name="myform">
-						<!--label>Subject</label>
-						<input name="message" type="text"-->
-						<label>To: </label>
-						<textarea name="recipient" id="recipient-list"></textarea>
-						<input type="hidden" value="https://s.kaskus.id/assets/ecard/ecard_56b9b35b36875.jpg" name="image" />
-						<input type="hidden" value="[Nama Agan]" name="from" />
-						<label><small>*bisa kirim ke lebih dari satu alamat email</small></label>
-						<label><small>*(pisahkan dengan ",")</small></label>
-						<input type="Submit" value="KIRIM">
+					<form class="form-pesan" name="myform">
+						<label>Untuk</label>
+						<input id="input-nameto" onfocus="clearIf(this, '[Nama Doi]')" type="text" maxlength="30"><br>
+						<label>Dari</label>
+						<input id="input-namefrom" onfocus="clearIf(this, '[Nama Agan]')" type="text" maxlength="30">
+						<label>Pesan</label>
+						<div class="area-pesan">
+							<textarea id="input-message" onfocus="clearIf(this, 'Tulis gombalan Agan di sini!');limitText(this.form.limitedtextarea,this.form.countdown,160);" name="limitedtextarea" onKeyDown="limitText(this.form.limitedtextarea,this.form.countdown,160);" onKeyUp="limitText(this.form.limitedtextarea,this.form.countdown,160);"></textarea>
+							<div class="text-left"><input readonly type="text" name="countdown" size="3" value="58"></div>
+						</div>
+						<div id="insert-text">Simpan Cinta!</div>
 					</form>
 				</div>
 				<div class="overlay-dark"></div>
@@ -91,7 +85,7 @@
 		</div>
 		<script>
 			var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-132312-24']);
+		   _gaq.push(['_setAccount', 'UA-132312-24']);
             _gaq.push(['_trackPageview']);
 
             (function() {
@@ -99,6 +93,21 @@
             ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
             })();
+
+            function clearIf(obj, val)
+            {
+            	if(obj.value == val)
+            		obj.value = '';
+            }
+
+            var startBtnTracked = false;
+
+            $("#user-control-hide").click(function(){
+            	if(!startBtnTracked)
+            	{
+	            	_gaq.push(['_trackEvent', 'Ecard Valentine', 'click', 'start']);	            	startBtnTracked = true;
+	            }
+		    })
 		</script>
 	</body>
 </html>
