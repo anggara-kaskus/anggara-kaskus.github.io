@@ -28,6 +28,7 @@
         document.addEventListener("DOMContentLoaded", function(event) { 
             setTimeout(function () {
                 dataLayer.push({'event': 'optimize.activate'});
+                dataLayer.push({'event': 'trackEvent','eventDetails.category': 'trh', 'eventDetails.action': 'click', 'eventDetails.label': 'manualTrigger'});
             }, 2000);
         });
     </script>
