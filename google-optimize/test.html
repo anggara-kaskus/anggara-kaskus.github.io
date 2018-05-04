@@ -29,14 +29,15 @@
             setTimeout(function () {
                 dataLayer.push({'event': 'optimize.activate'});
                 dataLayer.push({'event': 'trackEvent','eventDetails.category': 'trh', 'eventDetails.action': 'click', 'eventDetails.label': 'manualTrigger'});
+                ga('send', 'event', 'trh', 'click', 'manualTriggerGa');
             }, 2000);
         });
     </script>
 </head>
 <body>
     Tunggu 2 detik.... 
-    <span id="algo1" class="hidden"><a onclick="dataLayer.push({'event': 'trackEvent','eventDetails.category': 'trh', 'eventDetails.action': 'click', 'eventDetails.label': 'algo1'});" href="https://www.kaskus.co.id" target="_blank">ALGO1</a></span>
-    <span id="algo2" class="hidden"><a onclick="dataLayer.push({'event': 'trackEvent','eventDetails.category': 'trh', 'eventDetails.action': 'click', 'eventDetails.label': 'algo2'});" href="https://www.kaskus.co.id/forum" target="_blank">ALGO2</a></span>
-    <span id="algo3" class="hidden"><a onclick="dataLayer.push({'event': 'trackEvent','eventDetails.category': 'trh', 'eventDetails.action': 'click', 'eventDetails.label': 'algo3'});" href="https://fjb.kaskus.co.id" target="_blank">ALGO3</a></span>
+    <span id="algo1" class="hidden"><a onclick="dataLayer.push({'event': 'trackEvent','eventDetails.category': 'trh', 'eventDetails.action': 'click', 'eventDetails.label': 'algo1'});ga('send', 'event', 'trh', 'click', 'algo1Ga');" href="https://www.kaskus.co.id" target="_blank">ALGO1</a></span>
+    <span id="algo2" class="hidden"><a onclick="dataLayer.push({'event': 'trackEvent','eventDetails.category': 'trh', 'eventDetails.action': 'click', 'eventDetails.label': 'algo2'});ga('send', 'event', 'trh', 'click', 'algo2Ga');" href="https://www.kaskus.co.id/forum" target="_blank">ALGO2</a></span>
+    <span id="algo3" class="hidden"><a onclick="dataLayer.push({'event': 'trackEvent','eventDetails.category': 'trh', 'eventDetails.action': 'click', 'eventDetails.label': 'algo3'});ga('send', 'event', 'trh', 'click', 'algo3Ga');" href="https://fjb.kaskus.co.id" target="_blank">ALGO3</a></span>
 </body>
 </html>
