@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test page</title> 
+    
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-132312-41', 'auto');
+    ga('require', 'GTM-P8KWWMF');
+    ga('send', 'pageview');
+    </script>
+
+    <style>.async-hide { opacity: 0 !important} </style>
+    <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
+    h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
+    (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
+    })(window,document.documentElement,'async-hide','dataLayer',4000,
+    {'GTM-P8KWWMF':true});</script>
+
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-KGKS6M');</script>
+
+    <style>
+    .hidden {display:none;}
+    </style>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event) { 
+            setTimeout(function () {
+                dataLayer.push({'event': 'optimize.activate'});
+                dataLayer.push({'event': 'trackEvent','eventDetails.category': 'trh', 'eventDetails.action': 'click', 'eventDetails.label': 'manualTrigger'});
+                // ga('send', 'event', 'trh', 'click', 'manualTriggerGa');
+		// ga('send', 'event', 'trh', 'click', 'algo1Ga');
+            }, 2000);
+        });
+    </script>
+</head>
+<body>
+    Tunggu 2 detik.... 
+    <span id="algo1" class="hidden"><a onclick="dataLayer.push({'event': 'trackEvent','eventDetails.category': 'trh', 'eventDetails.action': 'click', 'eventDetails.label': 'algo1'});" href="https://anggara-kaskus.github.io/google-optimize/test.html?algo=1" target="_blank">ALGO1</a></span>
+    <span id="algo2" class="hidden"><a onclick="dataLayer.push({'event': 'trackEvent','eventDetails.category': 'trh', 'eventDetails.action': 'click', 'eventDetails.label': 'algo2'});" href="https://anggara-kaskus.github.io/google-optimize/test.html?algo=2" target="_blank">ALGO2</a></span>
+    <span id="algo3" class="hidden"><a onclick="dataLayer.push({'event': 'trackEvent','eventDetails.category': 'trh', 'eventDetails.action': 'click', 'eventDetails.label': 'algo3'});" href="https://anggara-kaskus.github.io/google-optimize/test.html?algo=3" target="_blank">ALGO3</a></span>
+</body>
+</html>
