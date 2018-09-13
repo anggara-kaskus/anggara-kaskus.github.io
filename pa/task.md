@@ -32,7 +32,8 @@ KASKUS WEB
 Flownya:
 
 Misal untuk script cron birthday (controller `cron.php` method `birthday`), dia query dulu semua data user yang birthday di hari itu.
-Kemudian dilooping sejumlah row yang ditemukan, buat ngirim email langsung ke SMTP (`model_global->send_email`). Kalau tiba-tiba script cron kena terminate di tengah jalan (misal karena di hari itu kebetulan banyak yang ultah), jadinya sisanya ga dapet notification.
+
+Kemudian dilooping sejumlah row yang ditemukan, buat ngirim email langsung ke SMTP (`model_global->send_email`). Kalau tiba-tiba script cron kena terminate di tengah jalan (misal karena di hari itu kebetulan banyak yang ultah sampai script PHPnya timed-out), jadinya sisanya ga dapet notification.
 
 Nah proses kirim email ke SMTP ini yang nantinya diganti dengan create queue ke RabbitMQ Server. Tumpukan queue nantinya bakal diproses (consumed) sama script worker yang isinya kirim email ke SMTP non-immediate.
 
