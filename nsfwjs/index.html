@@ -3,10 +3,17 @@
 <script>
 	function go() {
 		const url = document.getElementById('url').value;
-		loadImage(url);
+		const preview = document.getElementById('preview');
+		document.getElementById('output').innerHTML = '';
+		preview.innerHTML = '<h4>Preview</h4><img id="preview-img" onload="bindImg(this)" src="' + url + '">';
 	}
 
-	function loadImage(url, blur) {
+	function bindImg(obj) {
+		console.log(obj)
+		loadImage(obj.src, obj);
+	}
+
+	function loadImage(url, obj) {
 		const img = new Image();
 
 		log('Loading image: ' + url);
@@ -15,21 +22,22 @@
 			log('Failed loading image: ' + url);
 		}
 		img.onload = function () {
-			scan(this, blur)
+			scan(this, obj)
 		}
 		img.src = url;
+		return img;
 	}
 
 	function scan(img, obj) {
-		log('Scanning ' + img.src);
+		log('Classifying image: ' + img.src);
 		const start = +(new Date);
 
 		nsfwjs.load().then((model) => {
 			model.classify(img).then((predictions) => {
-				log("Predictions:");
+				log('\nPredictions for ' + img.src + ':');
 				let applyBlur = false;
 				for (i = 0 ; i < predictions.length; i++) {
-					log(' - ' + predictions[i].className + ' -> ' + predictions[i].probability);
+					log(' - ' + predictions[i].className + ' -> ' + round(predictions[i].probability));
 
 					if (
 						(predictions[i].className == 'Hentai' || predictions[i].className == 'Porn') &&
@@ -43,6 +51,7 @@
 				obj.classList.add('scanned')
 				if (obj && applyBlur) {
 					obj.classList.add('blur')
+					obj.addEventListener('click', (e) => e.target.classList.toggle('blur'));
 				}
 			});
 		});		
@@ -53,20 +62,28 @@
 		let e = document.getElementById('output');
 		e.innerHTML = e.innerHTML + "\n" + msg;
 	}
+
+	function round(num) {
+		return Math.round(num * 100) / 100;
+	}
+
 	window.onload = function () {
-		log('Ready!')
+		log('Executing document ready...')
+		log('As you may notice that this page is not responsive (UI Blocking)');
+		log('when the model is being loaded.');
+		log('See <a href="https://github.com/infinitered/nsfwjs/issues/94" target="_blank">this github issue</a>\n\n')
+
 		var imgs = document.getElementsByTagName('img');
 		for (let img of imgs) {
 			loadImage(img.attributes['src'].value, img);
-			img.addEventListener('click', (e) => e.target.classList.remove('blur'));
 		}
 	}
 </script>
 <style type="text/css">
 	img {
 		opacity: 0.1;
-		max-width: 300px;
-		max-height: : 100px;
+		max-width: 250px;
+		max-height: 250px;
 	}
 	img.scanned {
 		opacity: 1;
@@ -74,12 +91,26 @@
 	img.blur {
 		-webkit-filter: blur(30px);
 		filter: blur(30px);
+		cursor: pointer;
+	}
+	.half {
+		width: 45%;
+		display: inline-block;
+		vertical-align: top;
 	}
 </style>
-<h4>Neutral</h4>
-<img src="http://i.imgur.com/Kwxetau.jpg">
-<h4>Hentai</h4>
-<img src="http://i.imgur.com/ToVkOJI.jpg">
-<br><br><br>
-<input id="url" placeholder="URL" value="http://i.imgur.com/0UKjdJJ.jpg"><button onclick="go()">Start!</button>
-<pre id="output">Enter URL and click Start</pre>
+<div class="half">
+	<input size="60" id="url" placeholder="URL" value="http://i.imgur.com/0UKjdJJ.jpg" onclick="this.select()">
+	<button onclick="go()">Start!</button>
+	<pre style="white-space: pre-wrap;" id="output"></pre>
+</div>
+<div class="half" id="preview">
+	<div class="half">
+		<h4>Neutral</h4>
+		<img src="http://i.imgur.com/Kwxetau.jpg">
+	</div>
+	<div class="half">
+		<h4>Hentai</h4>
+		<img src="http://i.imgur.com/ToVkOJI.jpg">
+	</div>
+</div>
