@@ -1,0 +1,85 @@
+<script src="https://unpkg.com/@tensorflow/tfjs@2.6.0" type="text/javascript"></script>
+<script src="https://unpkg.com/nsfwjs@2.3.0" type="text/javascript"></script>
+<script>
+	function go() {
+		const url = document.getElementById('url').value;
+		loadImage(url);
+	}
+
+	function loadImage(url, blur) {
+		const img = new Image();
+
+		log('Loading image: ' + url);
+		img.crossOrigin = "anonymous";
+		img.onerror = function (e) {
+			log('Failed loading image: ' + url);
+		}
+		img.onload = function () {
+			scan(this, blur)
+		}
+		img.src = url;
+	}
+
+	function scan(img, obj) {
+		log('Scanning ' + img.src);
+		const start = +(new Date);
+
+		nsfwjs.load().then((model) => {
+			model.classify(img).then((predictions) => {
+				log("Predictions:");
+				let applyBlur = false;
+				for (i = 0 ; i < predictions.length; i++) {
+					log(' - ' + predictions[i].className + ' -> ' + predictions[i].probability);
+
+					if (
+						(predictions[i].className == 'Hentai' || predictions[i].className == 'Porn') &&
+						predictions[i].probability > 0.5
+					) {
+						applyBlur = true;
+					}
+				}
+				log('Elapsed time: ' + (+(new Date) - start) + 'ms')
+
+				obj.classList.add('scanned')
+				if (obj && applyBlur) {
+					obj.classList.add('blur')
+				}
+			});
+		});		
+	}
+
+	function log(msg) {
+		console.log(msg);
+		let e = document.getElementById('output');
+		e.innerHTML = e.innerHTML + "\n" + msg;
+	}
+	window.onload = function () {
+		log('Ready!')
+		var imgs = document.getElementsByTagName('img');
+		for (let img of imgs) {
+			loadImage(img.attributes['src'].value, img);
+			img.addEventListener('click', (e) => e.target.classList.remove('blur'));
+		}
+	}
+</script>
+<style type="text/css">
+	img {
+		opacity: 0.1;
+		max-width: 300px;
+		max-height: : 100px;
+	}
+	img.scanned {
+		opacity: 1;
+	}
+	img.blur {
+		-webkit-filter: blur(30px);
+		filter: blur(30px);
+	}
+</style>
+<h4>Neutral</h4>
+<img src="http://i.imgur.com/Kwxetau.jpg">
+<h4>Hentai</h4>
+<img src="http://i.imgur.com/ToVkOJI.jpg">
+<br><br><br>
+<input id="url" placeholder="URL" value="http://i.imgur.com/0UKjdJJ.jpg"><button onclick="go()">Start!</button>
+<pre id="output">Enter URL and click Start</pre>
