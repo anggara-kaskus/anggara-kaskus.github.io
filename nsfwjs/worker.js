@@ -33,21 +33,18 @@ function classify(img, id) {
 	postMessage({'event': 'log', 'message': 'Classifying image: [' + id + ']'});
 	const start = +(new Date);
 		model.classify(img).then((predictions) => {
-			let message = '\nPredictions for [' + id + ']:\n';
+			let message = 'Predictions for [' + id + ']:\n';
 
 			let applyBlur = false;
 			for (i = 0 ; i < predictions.length; i++) {
 				message += (i ? '    ' : ' -> ') + predictions[i].className.padEnd(15, ' ');
 				message += ': ' + round(predictions[i].probability) + '\n';
 
-				if (
-					(predictions[i].className == 'Hentai' || predictions[i].className == 'Porn') &&
-					predictions[i].probability > 0.5
-				) {
+				if (['Hentai', 'Porn', 'Sexy'].indexOf(predictions[i].className) > -1 && predictions[i].probability > 0.6) {
 					applyBlur = true;
 				}
 			}
-			message += 'Process time: ' + (+(new Date) - start) + 'ms';
+			message += '    Process time   : ' + (+(new Date) - start) + ' ms';
 			postMessage({'event': 'log', 'message': message});
 			postMessage({'event': 'scanResult', 'id': id, 'result': applyBlur});
 		});
