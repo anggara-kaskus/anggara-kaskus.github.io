@@ -1,83 +1,53 @@
-<script src="https://unpkg.com/@tensorflow/tfjs@2.6.0" type="text/javascript"></script>
-<script src="https://unpkg.com/nsfwjs@2.3.0" type="text/javascript"></script>
 <script>
-	function go() {
-		const url = document.getElementById('url').value;
-		const preview = document.getElementById('preview');
-		document.getElementById('output').innerHTML = '';
-		preview.innerHTML = '<h4>Preview</h4><img id="preview-img" onload="bindImg(this)" src="' + url + '">';
+const myWorker = new Worker('worker.js');
+const map = {};
+let index = 0;
+
+myWorker.onmessage = function (e) {
+	switch (e.data.event) {
+		case 'log':
+			log(e.data.message);
+			break;
+
+		case 'modelReady':
+			var imgs = document.getElementsByTagName('img');
+			for (let img of imgs) {
+				bindImg(img);
+			}
+			break;
+		
+		case 'scanResult':
+			let obj = map[e.data.id];
+			obj.classList.add('scanned')
+			if (e.data.result) {
+				obj.classList.add('blur')
+				obj.addEventListener('click', (e) => e.target.classList.toggle('blur'));
+			}
+			break;
+
+		default:
+			console.error('Unhandled event: ' + e.data.event);
 	}
+};
 
-	function bindImg(obj) {
-		console.log(obj)
-		loadImage(obj.src, obj);
-	}
+function log(msg) {
+	console.log(msg);
+	let e = document.getElementById('output');
+	e.innerHTML = e.innerHTML + "\n" + msg;
+}
 
-	function loadImage(url, obj) {
-		const img = new Image();
+function go() {
+	const url = document.getElementById('url').value;
+	const preview = document.getElementById('preview');
+	document.getElementById('output').innerHTML = '';
+	preview.innerHTML = '<h4>Preview</h4><img id="preview-img" onload="bindImg(this)" src="' + url + '">';
+}
 
-		log('Loading image: ' + url);
-		img.crossOrigin = "anonymous";
-		img.onerror = function (e) {
-			log('Failed loading image: ' + url);
-		}
-		img.onload = function () {
-			scan(this, obj)
-		}
-		img.src = url;
-		return img;
-	}
-
-	function scan(img, obj) {
-		log('Classifying image: ' + img.src);
-		const start = +(new Date);
-
-		nsfwjs.load().then((model) => {
-			model.classify(img).then((predictions) => {
-				log('\nPredictions for ' + img.src + ':');
-				let applyBlur = false;
-				for (i = 0 ; i < predictions.length; i++) {
-					log(' - ' + predictions[i].className + ' -> ' + round(predictions[i].probability));
-
-					if (
-						(predictions[i].className == 'Hentai' || predictions[i].className == 'Porn') &&
-						predictions[i].probability > 0.5
-					) {
-						applyBlur = true;
-					}
-				}
-				log('Elapsed time: ' + (+(new Date) - start) + 'ms')
-
-				obj.classList.add('scanned')
-				if (obj && applyBlur) {
-					obj.classList.add('blur')
-					obj.addEventListener('click', (e) => e.target.classList.toggle('blur'));
-				}
-			});
-		});		
-	}
-
-	function log(msg) {
-		console.log(msg);
-		let e = document.getElementById('output');
-		e.innerHTML = e.innerHTML + "\n" + msg;
-	}
-
-	function round(num) {
-		return Math.round(num * 100) / 100;
-	}
-
-	window.onload = function () {
-		log('Executing document ready...')
-		log('As you may notice that this page is not responsive (UI Blocking)');
-		log('when the model is being loaded.');
-		log('See <a href="https://github.com/infinitered/nsfwjs/issues/94" target="_blank">this github issue</a>\n\n')
-
-		var imgs = document.getElementsByTagName('img');
-		for (let img of imgs) {
-			loadImage(img.attributes['src'].value, img);
-		}
-	}
+function bindImg(img) {
+	var id = ++index;
+	map[id] = img;
+	myWorker.postMessage({'event': 'scanImage', 'src': img.attributes['src'].value, 'id': id});
+}
 </script>
 <style type="text/css">
 	img {
@@ -89,8 +59,8 @@
 		opacity: 1;
 	}
 	img.blur {
-		-webkit-filter: blur(30px);
-		filter: blur(30px);
+		-webkit-filter: blur(30px) grayscale(0.6);
+		filter: blur(10px) grayscale(0.6);
 		cursor: pointer;
 	}
 	.half {
@@ -99,6 +69,7 @@
 		vertical-align: top;
 	}
 </style>
+<h1>nsfwjs demo</h1>
 <div class="half">
 	<input size="60" id="url" placeholder="URL" value="http://i.imgur.com/0UKjdJJ.jpg" onclick="this.select()">
 	<button onclick="go()">Start!</button>
